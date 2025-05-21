@@ -6,8 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Jellyfin.Data.Entities;
+using Jellyfin.Data;
 using Jellyfin.Data.Enums;
+using Jellyfin.Database.Implementations.Entities;
+using Jellyfin.Database.Implementations.Enums;
 using Jellyfin.Extensions;
 using MediaBrowser.Controller.Library;
 using MediaBrowser.Controller.TV;
@@ -278,7 +280,7 @@ namespace MediaBrowser.Controller.Entities
             return ConvertToResult(_libraryManager.GetItemList(query));
         }
 
-        private QueryResult<BaseItem> ConvertToResult(List<BaseItem> items)
+        private QueryResult<BaseItem> ConvertToResult(IReadOnlyList<BaseItem> items)
         {
             return new QueryResult<BaseItem>(items);
         }

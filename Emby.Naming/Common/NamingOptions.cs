@@ -187,7 +187,8 @@ namespace Emby.Naming.Common
                 "disc",
                 "disk",
                 "vol",
-                "volume"
+                "volume",
+                "part"
             };
 
             ArtistSubfolders = new[]
@@ -238,6 +239,7 @@ namespace Emby.Naming.Common
                 ".dsp",
                 ".dts",
                 ".dvf",
+                ".eac3",
                 ".far",
                 ".flac",
                 ".gdm",
@@ -464,6 +466,14 @@ namespace Emby.Naming.Common
                 // Series and season only expression
                 // "the show S01", "the show season 1"
                 new EpisodeExpression(@"(.*(\\|\/))*(?<seriesname>.+)[\. _\-]+[sS](eason)?[\. _\-]*(?<seasonnumber>[0-9]+)")
+                {
+                    IsNamed = true
+                },
+
+                // Anime style expression
+                // "[Group][Series Name][21][1080p][FLAC][HASH]"
+                // "[Group] Series Name [04][BDRIP]"
+                new EpisodeExpression(@"(?:\[(?:[^\]]+)\]\s*)?(?<seriesname>\[[^\]]+\]|[^[\]]+)\s*\[(?<epnumber>[0-9]+)\]")
                 {
                     IsNamed = true
                 },
